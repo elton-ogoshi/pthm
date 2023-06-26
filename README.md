@@ -25,11 +25,13 @@ heatmap.plot()
 heatmap.save_fig('heatmap.pdf')
 ```
 
-In this code, `df` is a pandas DataFrame containing the properties ('row', 'group', 'property') of all elements of the periodic table. The `PeriodicTableHeatMap` class is used to generate and save the heatmap.
+In this code, `df` is a pandas DataFrame containing the properties (`row`, `group`, `property`) of all elements of the periodic table. The `PeriodicTableHeatMap` class is used to generate and save the heatmap.
+
+The notebook `demo.ipynb` demonstrates how to use the class `PeriodicTableHeatMap` defined at `pthm/core.py` to plot the heatmap.
 
 The result is something like the plot below
 
-![Atomic radius heatmap](atomic_radius_heatmap.pdf "Atomic_radius")
+![Atomic radius heatmap](etc/atomic_radius.png "Atomic_radius")
 
 ## License
 
