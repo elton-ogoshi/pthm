@@ -18,14 +18,14 @@ Here is an example of how to use the code:
 from periodic_table_heatmap import PeriodicTableHeatMap
 import pandas as pd
 
-# create a dataframe 'df' with necessary columns
+# Create a dataframe 'df' with necessary columns (In this example: 'elements' and 'atomic_radius')
 
 heatmap = PeriodicTableHeatMap(df)
-heatmap.plot()
+heatmap.plot('atomic_radius')
 heatmap.save_fig('heatmap.pdf')
 ```
 
-In this code, `df` is a pandas DataFrame containing the properties (`row`, `group`, `property`) of all elements of the periodic table. The `PeriodicTableHeatMap` class is used to generate and save the heatmap.
+In this code, `df` is a pandas DataFrame containing a column for the elements (`element`) and columns for the properties. The `PeriodicTableHeatMap` class is used to generate and save the heatmap.
 
 The notebook `demo.ipynb` demonstrates how to use the class `PeriodicTableHeatMap` defined at `pthm/core.py` to plot the heatmap.
 
