@@ -31,19 +31,20 @@ class PeriodicTableHeatMap:
         A colormap instance or registered colormap name.
     """
 
-    def __init__(self, df: pd.DataFrame, cmap='YlGnBu', default_property_val=None):
+    def __init__(self, property_df: pd.DataFrame, cmap='YlGnBu', default_property_val=None):
         """
         Construct all the necessary attributes for the PeriodicTableHeatMap object.
 
         Parameters
         ----------
-            df : pandas.DataFrame
+            property_df : pandas.DataFrame
                 Dataframe containing properties of elements of periodic table.
             cmap : str, optional
                 Name of the matplotlib colormap (default is 'YlGnBu').
             default_property_val: None
                 In case that the dataframe does not contain a row for every element, this value is set to the missing elements
         """
+        df = property_df.copy(deep=True)
 
         for element in Element:
             if element.row == 6 and element.group == 3:
@@ -57,15 +58,16 @@ class PeriodicTableHeatMap:
                 row_index = element.row
 
             # Hardcoded row and group information for the elements
-            self.rows = {element.symbol: element.row for element in Element}
+            self.rows = {element.symbol: row_index for element in Element}
             self.groups = {
-                element.symbol: element.group for element in Element}
+                element.symbol: group_index for element in Element}
 
             # Ensure all elements are present in dataframe
             for element in Element:
                 if element.symbol not in df['symbol'].values:
                     df = df.append({
                         'symbol': element.symbol,
+                        'number': element.Z,
                         'property': default_property_val,
                     }, ignore_index=True)
 
@@ -87,7 +89,8 @@ class PeriodicTableHeatMap:
         plotnine.ggplot.ggplot
             The plotnine ggplot object.
         """
-        df = self.df
+        df = self.df.copy(deep=True)
+        df['property_str'] = df.property.apply(str)
 
         # Separate into groups that are going to display a font with light color or black color
         df['p_group'] = pd.cut(df['property'], (df.property.min(), df.property.quantile(
