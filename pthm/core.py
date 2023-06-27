@@ -17,6 +17,7 @@ from plotnine import (
 )
 from plotnine.scales import scale_fill_gradientn
 import pandas as pd
+from pymatgen.core import Element
 
 
 class PeriodicTableHeatMap:
@@ -30,7 +31,7 @@ class PeriodicTableHeatMap:
         A colormap instance or registered colormap name.
     """
 
-    def __init__(self, df: pd.DataFrame, cmap='YlGnBu'):
+    def __init__(self, df: pd.DataFrame, cmap='YlGnBu', default_property_val=None):
         """
         Construct all the necessary attributes for the PeriodicTableHeatMap object.
 
@@ -40,7 +41,38 @@ class PeriodicTableHeatMap:
                 Dataframe containing properties of elements of periodic table.
             cmap : str, optional
                 Name of the matplotlib colormap (default is 'YlGnBu').
+            default_property_val: None
+                In case that the dataframe does not contain a row for every element, this value is set to the missing elements
         """
+
+        for element in Element:
+            if element.row == 6 and element.group == 3:
+                group_index = element.Z - 53
+                row_index = 9
+            elif element.row == 7 and element.group == 3:
+                group_index = element.Z - 85
+                row_index = 10
+            else:
+                group_index = element.group
+                row_index = element.row
+
+            # Hardcoded row and group information for the elements
+            self.rows = {element.symbol: element.row for element in Element}
+            self.groups = {
+                element.symbol: element.group for element in Element}
+
+            # Ensure all elements are present in dataframe
+            for element in Element:
+                if element.symbol not in df['symbol'].values:
+                    df = df.append({
+                        'symbol': element.symbol,
+                        'property': default_property_val,
+                    }, ignore_index=True)
+
+            # Create 'row' and 'group' columns based on 'symbol'
+            df['row'] = df['symbol'].map(self.rows)
+            df['group'] = df['symbol'].map(self.groups)
+
         self.df = df
         cmap = plt.get_cmap(cmap)
         self.colors = [matplotlib.colors.rgb2hex(
