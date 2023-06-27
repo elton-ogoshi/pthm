@@ -64,16 +64,16 @@ class PeriodicTableHeatMap:
 
             # Ensure all elements are present in dataframe
             for element in Element:
-                if element.symbol not in df['symbol'].values:
+                if element.symbol not in df['element'].values:
                     df = df.append({
-                        'symbol': element.symbol,
+                        'element': element.symbol,
                         'number': element.Z,
                         'property': default_property_val,
                     }, ignore_index=True)
 
-            # Create 'row' and 'group' columns based on 'symbol'
-            df['row'] = df['symbol'].map(self.rows)
-            df['group'] = df['symbol'].map(self.groups)
+            # Create 'row' and 'group' columns based on 'element'
+            df['row'] = df['element'].map(self.rows)
+            df['group'] = df['element'].map(self.groups)
 
         self.df = df
         cmap = plt.get_cmap(cmap)
@@ -104,7 +104,7 @@ class PeriodicTableHeatMap:
             ggplot(df, aes('group', 'row', fill='property'))
             # Add thicker black border to each tile
             + geom_tile(color="white", size=2)
-            + geom_text(aes(label='symbol', color='p_group'),
+            + geom_text(aes(label='element', color='p_group'),
                         size=14, show_legend=False)
             + geom_text(aes(label='number', color='p_group'), size=7,
                         nudge_y=0.3, nudge_x=-0.3, show_legend=False)
