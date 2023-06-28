@@ -31,7 +31,7 @@ The notebook `demo.ipynb` demonstrates how to use the class `PeriodicTableHeatMa
 
 The result is something like the plot below
 
-![Atomic radius heatmap](etc/atomic_radius.png "Atomic_radius")
+![periodic table heatmap](etc/atomic_radius.png "Atomic_radius")
 
 ## License
 
