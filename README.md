@@ -1,6 +1,6 @@
 # Periodic Table Heatmap
 
-This repo provides a script that uses `plotnine` to plot a heatmap of the periodic table. 
+This repo provides a Python class that uses `plotnine` to plot a heatmap of the periodic table. 
 
 The values can represent any continuous element property (e.g. atomic radius, electronegativity)
 
