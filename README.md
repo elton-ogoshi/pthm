@@ -27,8 +27,8 @@ import pandas as pd
 # Create a dataframe 'df' with necessary columns (In this example: 'elements' and 'atomic_radius')
 
 heatmap = PeriodicTableHeatMap(df)
-heatmap.plot('atomic_radius')
-heatmap.save_fig('heatmap.pdf')
+heatmap.plot('atomic_radius') # Input the column that has the continuous values for the elements
+heatmap.save_fig('heatmap.pdf') # Save the plot as pdf
 ```
 
 In this code, `df` is a pandas DataFrame containing a column for the elements (`element`) and columns for the properties. The `PeriodicTableHeatMap` class is used to generate and save the heatmap.
