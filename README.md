@@ -18,8 +18,6 @@ pip install -r requirements.txt
 
 ## Usage
 
-Here is an example of how to use the code:
-
 ```python
 from periodic_table_heatmap import PeriodicTableHeatMap
 import pandas as pd
