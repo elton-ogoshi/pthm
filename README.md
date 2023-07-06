@@ -29,7 +29,7 @@ heatmap.plot('atomic_radius') # Input the column that has the continuous values 
 heatmap.save_fig('heatmap.pdf') # Save the plot as pdf
 ```
 
-In this code, `df` is a pandas DataFrame containing a column for the elements (`element`) and columns for the properties. The `PeriodicTableHeatMap` class is used to generate and save the heatmap.
+Here, `df` is a pandas DataFrame containing a column for the elements (`element`) and columns for the properties. The `PeriodicTableHeatMap` class is used to generate and save the heatmap.
 
 The notebook `demo.ipynb` demonstrates how to use the class `PeriodicTableHeatMap` defined at `pthm/core.py` to plot the heatmap.
 
